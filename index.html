@@ -1,0 +1,27 @@
+<html>
+  <head>
+    <title>From MIDI</title>
+    <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js'></script>
+    <script>
+    $(document).ready(function(){
+      ws = new WebSocket("ws://0.0.0.0:8080/");
+      ws.onmessage = function(evt) {
+        $('body').css('background-color', evt.data);
+        $('#color').html(evt.data);
+      };
+      ws.onclose = function() { alert("WebSocket server is down"); };
+    });
+    </script>
+    <style>
+      #color {
+        font-family: helvetica;
+        font-size: 100px;
+        font-weight: bold;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="color"></div>
+  </body>
+</html>
